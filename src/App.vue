@@ -33,10 +33,7 @@ export default {
       resumeData: [],
       commentsList: [],
       loadComments: false,
-      loadForm: false,
-      alertText: '',
-      urlFirebase: process.env.VUE_APP_URL_FIREBASE,
-      urlJsonPlaceholder: process.env.VUE_APP_URL_JSON
+      loadForm: false
     }
   },
   mounted () {
@@ -51,7 +48,7 @@ export default {
     async getDataResume () {
       if (!this.loadForm) {
         try {
-          const response = await fetch(`${this.urlFirebase}/resume.json`, {
+          const response = await fetch(`${process.env.VUE_APP_URL_FIREBASE}/resume.json`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application-json'
@@ -77,7 +74,7 @@ export default {
       if (!this.loadForm) {
         try {
           this.loadForm = true
-          const response = await fetch(`${this.urlFirebase}/resume.json`, {
+          const response = await fetch(`${process.env.VUE_APP_URL_FIREBASE}/resume.json`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application-json'
@@ -101,7 +98,7 @@ export default {
       try {
         if (!this.loadComments) {
           this.loadComments = true
-          const response = await fetch(`${this.urlJsonPlaceholder}/comments?_limit=42`, {
+          const response = await fetch(`${process.env.VUE_APP_URL_JSON}/comments?_limit=42`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application-json'
