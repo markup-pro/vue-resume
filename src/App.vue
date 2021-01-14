@@ -51,7 +51,7 @@ export default {
     async getDataResume () {
       if (!this.loadForm) {
         try {
-          const response = await fetch('https://vue-resume-811e9-default-rtdb.firebaseio.com/resume.json', {
+          const response = await fetch(`${this.urlFirebase}/resume.json`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application-json'
@@ -77,7 +77,7 @@ export default {
       if (!this.loadForm) {
         try {
           this.loadForm = true
-          const response = await fetch('https://vue-resume-811e9-default-rtdb.firebaseio.com/resume.json', {
+          const response = await fetch(`${this.urlFirebase}/resume.json`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application-json'
