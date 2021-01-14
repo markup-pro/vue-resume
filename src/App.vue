@@ -3,13 +3,13 @@
 
   <div class="container column">
     <div class="card card-w30">
-      <app-resume-form
+      <resume-form
         :loader="loadForm"
         @add-resume-params="setResumeParams"
-      ></app-resume-form>
+      ></resume-form>
     </div>
     <div class="card card-w70">
-      <app-resume :data="resumeData"></app-resume>
+      <resume :data="resumeData"></resume>
     </div>
   </div>
   <div class="container">
@@ -23,8 +23,8 @@
 
 <script>
 import AppAlert from '@/AppAlert'
-import AppResume from '@/AppResume'
-import AppResumeForm from '@/AppResumeForm'
+import Resume from '@/components/Resume'
+import ResumeForm from '@/components/ResumeForm'
 import AppComments from '@/AppComments'
 
 export default {
@@ -34,7 +34,9 @@ export default {
       commentsList: [],
       loadComments: false,
       loadForm: false,
-      alertText: ''
+      alertText: '',
+      urlFirebase: process.env.VUE_APP_URL_FIREBASE,
+      urlJsonPlaceholder: process.env.VUE_APP_URL_JSON
     }
   },
   mounted () {
@@ -99,7 +101,7 @@ export default {
       try {
         if (!this.loadComments) {
           this.loadComments = true
-          const response = await fetch('https://jsonplaceholder.typicode.com/comments?_limit=42', {
+          const response = await fetch(`${this.urlJsonPlaceholder}/comments?_limit=42`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application-json'
@@ -116,6 +118,6 @@ export default {
       }
     }
   },
-  components: { AppResume, AppResumeForm, AppComments, AppAlert }
+  components: { Resume, ResumeForm, AppComments, AppAlert }
 }
 </script>
