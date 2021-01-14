@@ -1,0 +1,121 @@
+<template lang="html">
+  <app-alert :text="alertText"></app-alert>
+
+  <div class="container column">
+    <div class="card card-w30">
+      <app-resume-form
+        :loader="loadForm"
+        @add-resume-params="setResumeParams"
+      ></app-resume-form>
+    </div>
+    <div class="card card-w70">
+      <app-resume :data="resumeData"></app-resume>
+    </div>
+  </div>
+  <div class="container">
+    <app-comments
+      :comments="commentsList"
+      :loader="loadComments"
+      @load-comments="getComments"
+    ></app-comments>
+  </div>
+</template>
+
+<script>
+import AppAlert from '@/AppAlert'
+import AppResume from '@/AppResume'
+import AppResumeForm from '@/AppResumeForm'
+import AppComments from '@/AppComments'
+
+export default {
+  data () {
+    return {
+      resumeData: [],
+      commentsList: [],
+      loadComments: false,
+      loadForm: false,
+      alertText: ''
+    }
+  },
+  mounted () {
+    this.getDataResume()
+  },
+  methods: {
+    hideAlert () {
+      setTimeout(() => {
+        this.alertText = ''
+      }, 3000)
+    },
+    async getDataResume () {
+      if (!this.loadForm) {
+        try {
+          const response = await fetch('https://vue-resume-811e9-default-rtdb.firebaseio.com/resume.json', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application-json'
+            }
+          })
+
+          const data = await response.json()
+          this.resumeData = Object.keys(data).map(key => {
+            return {
+              id: key,
+              type: data[key].type,
+              value: data[key].value
+            }
+          })
+          this.alertText = 'Резюме успешно загружено'
+          this.hideAlert()
+        } catch (err) {
+          console.error(err.message)
+        }
+      }
+    },
+    async setResumeParams (data) {
+      if (!this.loadForm) {
+        try {
+          this.loadForm = true
+          const response = await fetch('https://vue-resume-811e9-default-rtdb.firebaseio.com/resume.json', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application-json'
+            },
+            body: JSON.stringify(data)
+          })
+
+          this.resumeData.push({
+            id: await response.json(),
+            ...data
+          })
+          this.loadForm = false
+          this.alertText = 'Резюме обновлено'
+          this.hideAlert()
+        } catch (err) {
+          console.error(err.message)
+        }
+      }
+    },
+    async getComments () {
+      try {
+        if (!this.loadComments) {
+          this.loadComments = true
+          const response = await fetch('https://jsonplaceholder.typicode.com/comments?_limit=42', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application-json'
+            }
+          })
+
+          this.commentsList = await response.json()
+          this.loadComments = false
+          this.alertText = 'Комментарии успешно загружены'
+          this.hideAlert()
+        }
+      } catch (err) {
+        console.error(err.message)
+      }
+    }
+  },
+  components: { AppResume, AppResumeForm, AppComments, AppAlert }
+}
+</script>
