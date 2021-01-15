@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <h2>Комментарии</h2>
-    <ul class="list" v-if="comments.length !== 0">
+    <ul class="list" v-if="!!comments.length">
       <li
         class="list-item"
         v-for="comment in comments"
@@ -13,7 +13,7 @@
       </li>
     </ul>
     <p v-else>Пока нет комментариев</p>
-    <p v-if="comments.length === 0">
+    <p v-if="!comments.length">
       <app-btn
         class="primary"
         @action="$emit('loadComments')"

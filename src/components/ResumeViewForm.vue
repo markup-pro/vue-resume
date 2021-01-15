@@ -31,7 +31,7 @@ export default {
     addResumeParams (data) {
       if (!data) {
         console.warn('No data in open-resume-params emit')
-      } else if (Object.keys(data).length === 0) {
+      } else if (!Object.keys(data).length) {
         console.warn('Data empty in open-resume-params emit')
       } else {
         return true

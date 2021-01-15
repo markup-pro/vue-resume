@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data.length === 0">Добавьте данные в резюме</div>
+  <div v-if="!data.length">Добавьте данные в резюме</div>
   <div v-else>
     <component
       v-for="item in data"
