@@ -1,11 +1,10 @@
 <template>
-  <div class="avatar">
-    <img :src="data.value">
-  </div>
+  <h2>{{ data.value }}</h2>
 </template>
 
 <script>
 export default {
+  name: 'ResumeViewSubtitle',
   props: {
     data: {
       type: Object,

@@ -3,19 +3,20 @@
   <div v-else>
     <component
       v-for="item in data"
-      :is="`resume-${item.type}`"
+      :is="`resume-view-${item.type}`"
       :key="item.id"
       :data="item"></component>
   </div>
 </template>
 
 <script>
-import ResumeTitle from '@/components/ResumeTitle'
-import ResumeSubtitle from '@/components/ResumeSubtitle'
-import ResumeAvatar from '@/components/ResumeAvatar'
-import ResumeText from '@/components/ResumeText'
+import ResumeViewTitle from '@/components/ResumeViewTitle'
+import ResumeViewSubtitle from '@/components/ResumeViewSubtitle'
+import ResumeViewAvatar from '@/components/ResumeViewAvatar'
+import ResumeViewText from '@/components/ResumeViewText'
 
 export default {
+  name: 'ResumeView',
   props: {
     data: {
       type: Array,
@@ -25,6 +26,6 @@ export default {
       }
     }
   },
-  components: { ResumeTitle, ResumeSubtitle, ResumeAvatar, ResumeText }
+  components: { ResumeViewTitle, ResumeViewSubtitle, ResumeViewAvatar, ResumeViewText }
 }
 </script>

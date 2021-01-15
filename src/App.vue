@@ -3,13 +3,13 @@
 
   <div class="container column">
     <div class="card card-w30">
-      <resume-form
+      <resume-view-form
         :loader="loadForm"
         @add-resume-params="setResumeParams"
-      ></resume-form>
+      ></resume-view-form>
     </div>
     <div class="card card-w70">
-      <resume :data="resumeData"></resume>
+      <resume-view :data="resumeData"></resume-view>
     </div>
   </div>
   <div class="container">
@@ -23,11 +23,12 @@
 
 <script>
 import AppAlert from '@/AppAlert'
-import Resume from '@/components/Resume'
-import ResumeForm from '@/components/ResumeForm'
+import ResumeView from '@/components/ResumeView'
+import ResumeViewForm from '@/components/ResumeViewForm'
 import AppComments from '@/AppComments'
 
 export default {
+  name: 'App',
   data () {
     return {
       resumeData: [],
@@ -115,6 +116,6 @@ export default {
       }
     }
   },
-  components: { Resume, ResumeForm, AppComments, AppAlert }
+  components: { ResumeView, ResumeViewForm, AppComments, AppAlert }
 }
 </script>

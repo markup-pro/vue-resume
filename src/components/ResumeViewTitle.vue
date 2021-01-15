@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  name: 'ResumeViewTitle',
   props: {
     data: {
       type: Object,

@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name: 'AppAlert',
   props: {
     color: {
       type: String,

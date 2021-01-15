@@ -26,6 +26,7 @@
 import AppBtn from '@/AppBtn'
 
 export default {
+  name: 'AppComments',
   emits: ['loadComments'],
   props: {
     comments: {

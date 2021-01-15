@@ -1,9 +1,10 @@
 <template>
-  <h2>{{ data.value }}</h2>
+  <p>{{ data.value }}</p>
 </template>
 
 <script>
 export default {
+  name: 'ResumeViewText',
   props: {
     data: {
       type: Object,

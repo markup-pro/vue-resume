@@ -26,6 +26,7 @@
 import AppBtn from '@/AppBtn'
 
 export default {
+  name: 'ResumeViewForm',
   emits: {
     addResumeParams (data) {
       if (!data) {
